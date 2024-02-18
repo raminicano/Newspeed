@@ -1,6 +1,4 @@
-from . import db
-
-
+from app import db
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -20,7 +18,7 @@ class News(db.Model):
     nid = db.Column(db.Integer, primary_key=True)
     cid = db.Column(db.Integer, nullable=False)
     category = db.Column(db.String(255))
-    title = db.Column(db.String(255))s
+    title = db.Column(db.String(255))
     content = db.Column(db.Text)
     ymd = db.Column(db.DateTime)
     com_num = db.Column(db.Integer, default=0)

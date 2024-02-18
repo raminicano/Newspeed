@@ -1,13 +1,16 @@
 from flask import render_template, redirect, url_for, flash, request, jsonify
 from .forms import RegistrationForm
 from app.models.models import db, User, UserCategories
-from app import bcrypt  # app 패키지에서 bcrypt를 임포트
+from flask import current_app
+from app import bcrypt
 
 
 def register_user():
     form = RegistrationForm()
     if form.validate_on_submit():  # 폼 제출 시 데이터 유효성 검증
+        hashed_password = current_app.bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+
         user = User(id=form.id.data, email=form.email.data, passwd=hashed_password)
         
         db.session.add(user)
