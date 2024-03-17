@@ -1,9 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-# from app.auth import auth as auth_blueprint
-# from app.news import news as news_blueprint
-# from app.bookmarks import bookmarks as bookmarks_blueprint
 from konlpy.tag import Mecab
 from gensim.models.doc2vec import Doc2Vec
 from config import Config
