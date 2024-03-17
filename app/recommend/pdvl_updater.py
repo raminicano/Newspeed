@@ -9,7 +9,7 @@ class PDVLUpdater:
         self.session = session
 
     def update_pdvl_table(self, user_id):
-        select_query = text('SELECT cid, time FROM news_log where uid = :user_id;')
+        select_query = text('SELECT cid, time FROM pn.news_log where uid = :user_id;')
         result = self.session.execute(select_query, {'user_id':user_id}).fetchall()
 
         aggregated_feature_vectors = {}
@@ -26,7 +26,7 @@ class PDVLUpdater:
         for uid, feature_vector in aggregated_feature_vectors.items():
             feature_vector_str = json.dumps(feature_vector.tolist())
             update_query = text('''
-                INSERT INTO pdvl (uid, fv)
+                INSERT INTO pn.pdvl (uid, fv)
                 VALUES (:uid, :fv)
                 ON DUPLICATE KEY UPDATE fv = :fv;
             ''')

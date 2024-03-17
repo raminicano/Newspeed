@@ -17,6 +17,7 @@ def get_recommendations():
     mecab = current_app.mecab
     loaded_model = current_app.loaded_model
     check = NewsLog.query.filter_by(uid=uid).all()
+    print(check)
     # 전송할 데이터
     news_data = []
     # 로그 데이터를 사용하는 경우
@@ -25,7 +26,7 @@ def get_recommendations():
         if len(check) % 3 == 0:
             updater = PDVLUpdater(loaded_model, db.session)
             updater.update_pdvl_table(uid)
-            # print('업데이트 완료')
+            print('업데이트 완료')
         
         recommended_articles = recommendation_for_user(uid, loaded_model, db.session, mecab)
         for cid, score in recommended_articles:
